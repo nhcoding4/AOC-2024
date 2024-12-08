@@ -179,23 +179,11 @@ struct Solver {
 
     mutating func getBlockersToTest() -> Set<[Int]> {
         let route = solve()!
-
+        
         var blockPoints: Set<[Int]> = []
-        let xLim = mapData[0].count
-        let ylim = mapData.count
-
         for point in route {
             blockPoints.insert([point.x, point.y])
-            for _ in 0..<4 {
-                var rotatePoint = point
-                rotatePoint.rotate()
-                let routePoint = rotatePoint.add(other: rotatePoint.direction.directionData())
 
-                if (routePoint.x >= 0 && routePoint.x < xLim)
-                    && (rotatePoint.y >= 0 && routePoint.y < ylim)
-                {
-                    blockPoints.insert([routePoint.x, rotatePoint.y])
-                }
             }
         }
 
